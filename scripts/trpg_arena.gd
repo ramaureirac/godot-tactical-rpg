@@ -23,7 +23,7 @@ func _process_tiles():
 		for tile in $TRPGTiles.get_children():
 			tile.logic()
 			self.tiles.append(tile)
-		print("Arena: ", self.tiles.size(), " tiles founded")
+		#print("Arena: ", self.tiles.size(), " tiles founded")
 	else:
 		for tile in self.tiles:
 			tile.logic()
@@ -37,14 +37,14 @@ func _process_pawns(var delta):
 				ally.logic()
 				self.allies.push_back(ally)
 				self.turns_queue.push_back(ally)
-			print("Area: ", self.allies.size(), " allies on the battlefield")
+			#print("Area: ", self.allies.size(), " allies on the battlefield")
 		if self.enemies.empty():
 			for enemy in $TRPGEnemies.get_children():
 				enemy.init(self)
 				enemy.logic()
 				self.enemies.push_back(enemy)
 				self.turns_queue.push_back(enemy)
-			print("Area: ", self.enemies.size(), " enemies on the battlefield")
+			#print("Area: ", self.enemies.size(), " enemies on the battlefield")
 	# turn-based system --
 	elif camera != null:
 		for pawn in self.turns_queue:
