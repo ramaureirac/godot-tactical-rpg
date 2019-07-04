@@ -121,7 +121,7 @@ func _gen_path(var dstny_tile, var ignore_not_available = false):
 				mv_path.push_front(dstny_tile)
 				dstny_tile = dstny_tile.root
 			mv_path.push_front(dstny_tile)
-			print("Pawn: generated path to ", mv_path.back().get_translation())
+			#print("Pawn: generated path to ", mv_path.back().get_translation())
 			return mv_path
 	return self.path
 
@@ -138,8 +138,8 @@ func _move(var delta):
 			if self.path.empty():
 				self.available_mvmts.clear()
 				return false
-			else:
-				print("Pawn: moving to ", self.path.front().get_translation())
+			#else:
+			#	print("Pawn: moving to ", self.path.front().get_translation())
 	return true
 
 func _can_act():
@@ -166,9 +166,9 @@ func _ai_get_path_nearest_ally():
 							if tmp_path.size() < distance:
 								distance = tmp_path.size()
 								mv_path = tmp_path
-		while !mv_path.empty() && mv_path.back().curr_pawn != null:
-			mv_path.pop_back()
 		while mv_path.size() > self.move_range + 1:
+			mv_path.pop_back()
+		while !mv_path.empty() && mv_path.back().curr_pawn != null:
 			mv_path.pop_back()
 		if mv_path.empty():
 			mv_path.push_front(self.curr_tile)
