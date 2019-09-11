@@ -52,6 +52,7 @@ func _process_pawns(var delta):
 		var pawn = self.turns_queue.front()
 		var tile = self.camera.logic(delta, pawn)
 		if !pawn.act(delta, tile):
+			pawn.reset_acts()
 			self.turns_queue.push_back(self.turns_queue.pop_front())
 			self._reset()
 
