@@ -24,24 +24,25 @@ func init(var arena):
 
 func logic():
 	self._update_curr_tile()
-	if self._can_act():
-		self._reset_acts()
+	
+func reset_acts():
+	self.can_move = true
 
 func act(var delta, var tile):
-	if self.ally:
-		self._ally_act(tile)
-	else:
-		self._enemy_act()
-	self.can_move = self._move(delta)
+	if self._can_act():
+		self.available_mvmts = self._gen_av_mvmts()
+		if self.ally:
+			self._ally_act(tile)
+		else:
+			self._enemy_act()
+		self.can_move = self._move(delta)
 	return self._can_act()
 
 # pawn acts
 func _ally_act(var tile):
-	self.available_mvmts = self._gen_available_mvmts()
 	self.path = self._gen_path(tile)
 
 func _enemy_act():
-	self.available_mvmts = self._gen_all_mvmts()
 	self.path = self._ai_get_path_nearest_ally()
 
 
@@ -49,39 +50,7 @@ func _enemy_act():
 func _update_curr_tile():
 	self.curr_tile = $Ray/CurrTile.get_collider()
 
-func _gen_available_mvmts():
-	if self.available_mvmts.empty():
-		if curr_tile != null:
-			var curr_tile_piv = self.curr_tile
-			var process_queue = []
-			var av_mvmts = []
-			curr_tile_piv.mv_available = true
-			process_queue.push_back(curr_tile_piv)
-			av_mvmts.append(curr_tile_piv)
-			while !process_queue.empty():
-				curr_tile_piv = process_queue.pop_front()
-				# not to far
-				if curr_tile_piv.distance < self.move_range:
-					for neighbor in curr_tile_piv.neighbors:
-						# not to high
-						var height = abs(neighbor.get_translation().y - curr_tile_piv.get_translation().y)
-						if  height <= self.jump_height:
-							# not rooted yet
-							if neighbor.root == null && neighbor != self.curr_tile:
-								# tile available for pass over (used by team-mate)
-								if neighbor.curr_pawn == null || neighbor.curr_pawn.ally == self.ally:
-									neighbor.root = curr_tile_piv
-									neighbor.distance = curr_tile_piv.distance + 1
-									# tile available for standing on (empty tile)
-									if neighbor.curr_pawn == null:
-										neighbor.mv_available = true
-										av_mvmts.append(neighbor)
-									process_queue.push_back(neighbor)
-			#print("Pawn: they're ", av_mvmts.size(), " tiles availables for move")
-			return av_mvmts
-	return self.available_mvmts
-
-func _gen_all_mvmts():
+func _gen_av_mvmts():
 	if self.available_mvmts.empty():
 		if curr_tile != null:
 			var curr_tile_piv = self.curr_tile
@@ -98,11 +67,11 @@ func _gen_all_mvmts():
 					if  height <= self.jump_height:
 						# not rooted yet
 						if neighbor.root == null && neighbor != self.curr_tile:
-							# tile available for pass over (used by team-mate)
+							# tile available (or used by team-mate)
 							if neighbor.curr_pawn == null || neighbor.curr_pawn.ally == self.ally:
 								neighbor.root = curr_tile_piv
 								neighbor.distance = curr_tile_piv.distance + 1
-								# tile available for standing on (empty tile)
+								# tile available for standing.
 								if neighbor.curr_pawn == null:
 									# not to far
 									if neighbor.distance <= self.move_range:
@@ -144,9 +113,6 @@ func _move(var delta):
 
 func _can_act():
 	return self.can_move
-
-func _reset_acts():
-	self.can_move = true
 
 
 # AI functions:
