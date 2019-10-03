@@ -5,7 +5,7 @@ This is not a fully functional game framework or a professional work, just a sim
 Anyways, feel free to use this sample in your own game. 
 
 You can see all project's features on [YouTube](https://www.youtube.com/watch?v=j0ov4zGUp68).<br/>
-Another demo from [Open Source Games](https://www.youtube.com/watch?v=-AY6KEdX_3E)
+Another demo from [Open Source Games](https://www.youtube.com/watch?v=-AY6KEdX_3E).
 
 ### Preview
 ![preview](https://i.ibb.co/MNznGYX/preview-trpg-godot.png)
