@@ -1,12 +1,12 @@
 extends StaticBody
 
-
-var neighbors = []		# tile neighbors
-var reachable = false	# can I reach and stand in here?
-var path_gen = false		# the path generated is throught this tile
-var taken = false		# there is something above this?
-var root = null			# tile's parent
-var weight = 0			# current distance from current tile
+var neighbors = []			
+var reachable = false		
+var path_gen = false
+var taken = false
+var root = null	
+var weight = 0
+var inv_weight = INF
 
 func _find_neighbors():
 	if self.neighbors.empty():
@@ -29,3 +29,4 @@ func reset():
 	self.taken = false
 	self.root = null
 	self.weight = 0
+	self.inv_weight = INF
