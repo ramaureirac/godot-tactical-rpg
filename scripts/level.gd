@@ -3,7 +3,6 @@ extends Spatial
 """
 TODO
 configure jump and vertical tiles like buildings, bridges, etc.
-posiblity to pass over tiles that are taken by your same team
 attack and health
 """
 

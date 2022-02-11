@@ -1,0 +1,76 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://scripts/tile.gd" type="Script" id=1]
+
+[sub_resource type="BoxShape" id=1]
+
+[sub_resource type="CubeMesh" id=2]
+
+[sub_resource type="SpatialMaterial" id=3]
+albedo_color = Color( 0.156863, 0.152941, 0.152941, 1 )
+metallic_specular = 0.0
+
+[sub_resource type="PlaneMesh" id=4]
+
+[sub_resource type="SpatialMaterial" id=5]
+albedo_color = Color( 0.00784314, 0.207843, 0.317647, 1 )
+
+[sub_resource type="SpatialMaterial" id=6]
+albedo_color = Color( 0.196078, 0.333333, 0.443137, 1 )
+
+[node name="TileB" type="StaticBody"]
+script = ExtResource( 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+shape = SubResource( 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="CollisionShape"]
+mesh = SubResource( 2 )
+material/0 = SubResource( 3 )
+
+[node name="Ray" type="Spatial" parent="."]
+visible = false
+
+[node name="Neighbors" type="Spatial" parent="Ray"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0 )
+
+[node name="N" type="RayCast" parent="Ray/Neighbors"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2 )
+enabled = true
+cast_to = Vector3( 0, -8, 0 )
+
+[node name="E" type="RayCast" parent="Ray/Neighbors"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0 )
+enabled = true
+cast_to = Vector3( 0, -8, 0 )
+
+[node name="W" type="RayCast" parent="Ray/Neighbors"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0 )
+enabled = true
+cast_to = Vector3( 0, -8, 0 )
+
+[node name="S" type="RayCast" parent="Ray/Neighbors"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2 )
+enabled = true
+cast_to = Vector3( 0, -8, 0 )
+
+[node name="Up" type="RayCast" parent="Ray"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0 )
+enabled = true
+cast_to = Vector3( 0, 4.25, 0 )
+collision_mask = 3
+
+[node name="Indicators" type="Spatial" parent="."]
+transform = Transform( 0.9, 0, 0, 0, 1, 0, 0, 0, 0.9, 0, 0.001, 0 )
+
+[node name="PathGen" type="MeshInstance" parent="Indicators"]
+visible = false
+mesh = SubResource( 4 )
+skeleton = NodePath("../Reachable")
+material/0 = SubResource( 5 )
+
+[node name="Reachable" type="MeshInstance" parent="Indicators"]
+visible = false
+mesh = SubResource( 4 )
+material/0 = SubResource( 6 )

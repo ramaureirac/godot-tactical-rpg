@@ -23,6 +23,9 @@ func _process(_delta):
 	self._mark_tile()
 	self.taken = $Ray/Up.is_colliding()
 
+func get_object_above():
+	return $Ray/Up.get_collider()
+
 func reset():
 	self.reachable = false
 	self.path_gen = false

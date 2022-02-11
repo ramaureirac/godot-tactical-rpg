@@ -11,7 +11,7 @@ config_version=4
 [application]
 
 config/name="godot-tactical-rpg"
-run/main_scene="res://levels/testlevel.scn"
+run/main_scene="res://assets/levels/level.tscn"
 config/icon="res://icons/icon.png"
 
 [input]
@@ -64,4 +64,4 @@ common/enable_pause_aware_picking=true
 quality/filters/anisotropic_filter_level=16
 quality/subsurface_scattering/quality=2
 quality/filters/msaa=2
-environment/default_environment="res://tres/default_env.tres"
+environment/default_environment="res://environments/default_env.tres"

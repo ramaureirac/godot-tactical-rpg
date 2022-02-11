@@ -1,18 +1,26 @@
 extends Spatial
 
 func find_nearest_tile_reachable(var tile):
+	"""
+	if a tile is not reachable, this function will return the 
+	the closest tile on its movement_tree
+	"""
 	while !tile.reachable:
 		tile = tile.root
 	return tile
 
 func find_nearest_tile_neighbor(var from, var to):
+	"""
+	giving a tile 'to' it will find the shortest path to one of its
+	neighbors. This is usefull when pawns are following a target
+	"""
 	to.inv_weight = 0
 	var pq = [to]
 	var chk = []
 	var tile = from
 	while !pq.empty():
 		var t = pq.pop_front()
-		if t.root or t == from:
+		if (t.root or t == from) and !t.taken:
 			if t.inv_weight < tile.inv_weight:
 				tile = t
 			elif t.inv_weight == tile.inv_weight and t.weight < tile.weight:
@@ -25,28 +33,31 @@ func find_nearest_tile_neighbor(var from, var to):
 		chk.append(t)
 	return tile
 
-func _gen_movement_tree(var tile):
+func _gen_movement_tree(var tile, var walkeable_obj):
 	"""
 	generate a movement tree linking each tile of the arena with his parent.
 	this will set 'tile' as the head of the movement tree.
+	the variable 'walkeable_obj' will contain game objects which a pawn can
+	pass throught but can't stand on it, e.g: pawns of the same team
 	"""
 	var pq = [tile]
 	while !pq.empty():
 		var t = pq.pop_front()
 		for n in t.neighbors:
 			if n != tile:
-				if n.root == null and !n.taken:
+				var obj = n.get_object_above()
+				if n.root == null and (obj in walkeable_obj or !obj):
 					n.root = t
 					n.weight = t.weight + 1
 					pq.push_back(n)
 
-func mark_available_movements(var from, var d):
+func mark_available_movements(var from, var d, var walkeable_obj=[]):
 	"""
 	mark which tiles are reachable according
 	to 'd' parameter. First it link all possible destinations.
 	"""
 	if from == null: return
-	self._gen_movement_tree(from)
+	self._gen_movement_tree(from, walkeable_obj)
 	for t in $Tiles.get_children():
 		if t == from or t.weight <= d and t.weight > 0 and !t.taken:
 			t.reachable = true
