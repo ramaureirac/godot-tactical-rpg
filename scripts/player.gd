@@ -30,7 +30,7 @@ func _select_pawn_for_movement():
 		var t = self.curr_pawn.get_tile()
 		var d = self.curr_pawn.distance
 		self.t_camera.set_target(t)
-		self.arena.mark_available_movements(t, d)
+		self.arena.mark_available_movements(t, d, self.pawns)
 
 func _select_tile_for_movement():
 	var t = self.t_camera.select_tile()

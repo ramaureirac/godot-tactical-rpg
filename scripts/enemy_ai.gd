@@ -29,7 +29,7 @@ func set_destination(var allies):
     self.curr_pawn = self.pawns.front()
     var t = self.curr_pawn.get_tile()
     var d = self.curr_pawn.distance
-    self.arena.mark_available_movements(t, d)
+    self.arena.mark_available_movements(t, d, self.pawns)
     var nt = self._chase_nearest_ally(allies)
     self.curr_pawn.path_stack = self.arena.gen_path(nt)
     self.t_camera.set_target(nt)
