@@ -8,11 +8,27 @@ var root = null
 var weight = 0
 var inv_weight = INF
 
+# REFACTOR + OPTIMIZE!!!!
 func _find_neighbors():
-	if self.neighbors.empty():
-		for r in $Ray/Neighbors.get_children():
-			if r.is_colliding():
-				self.neighbors.append(r.get_collider())
+	if $Neighbors and self.neighbors.size() == 0:
+		for areas in $Neighbors.get_children():
+			for a in areas.get_overlapping_bodies():
+				var ay = a.get_translation().y
+				var sy = self.get_translation().y
+				if ay == sy:
+					self.neighbors.append(a)
+				elif ay > sy:
+					var from = self.get_translation()-Vector3.UP*0.15
+					var to = self.get_translation()+Vector3.UP*(ay-sy+2)
+					var s = get_world().get_direct_space_state()
+					if !s.intersect_ray(from, to, [], 1):
+						self.neighbors.append(a)
+				else:
+					var from = a.get_translation()-Vector3.UP*0.15
+					var to = a.get_translation()+Vector3.UP*(sy-ay+2)
+					var s = get_world().get_direct_space_state()
+					if !s.intersect_ray(from, to, [], 1):
+						self.neighbors.append(a)
 
 func _mark_tile():
 	$Indicators/Reachable.visible = self.reachable and !self.path_gen

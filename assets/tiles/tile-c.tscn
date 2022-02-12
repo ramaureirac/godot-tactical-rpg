@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scripts/tile.gd" type="Script" id=1]
 
@@ -18,6 +18,8 @@ albedo_color = Color( 0.00784314, 0.207843, 0.317647, 1 )
 [sub_resource type="SpatialMaterial" id=6]
 albedo_color = Color( 0.196078, 0.333333, 0.443137, 1 )
 
+[sub_resource type="BoxShape" id=7]
+
 [node name="TileC" type="StaticBody"]
 script = ExtResource( 1 )
 
@@ -31,29 +33,6 @@ material/0 = SubResource( 3 )
 
 [node name="Ray" type="Spatial" parent="."]
 visible = false
-
-[node name="Neighbors" type="Spatial" parent="Ray"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0 )
-
-[node name="N" type="RayCast" parent="Ray/Neighbors"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2 )
-enabled = true
-cast_to = Vector3( 0, -8, 0 )
-
-[node name="E" type="RayCast" parent="Ray/Neighbors"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0 )
-enabled = true
-cast_to = Vector3( 0, -8, 0 )
-
-[node name="W" type="RayCast" parent="Ray/Neighbors"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0 )
-enabled = true
-cast_to = Vector3( 0, -8, 0 )
-
-[node name="S" type="RayCast" parent="Ray/Neighbors"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2 )
-enabled = true
-cast_to = Vector3( 0, -8, 0 )
 
 [node name="Up" type="RayCast" parent="Ray"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0 )
@@ -74,3 +53,34 @@ material/0 = SubResource( 5 )
 visible = false
 mesh = SubResource( 4 )
 material/0 = SubResource( 6 )
+
+[node name="Neighbors" type="Spatial" parent="."]
+visible = false
+
+[node name="West" type="Area" parent="Neighbors"]
+transform = Transform( 0.8, 0, 0, 0, 8, 0, 0, 0, 0.8, -2, 0, 0 )
+collision_layer = 0
+
+[node name="CollisionShape" type="CollisionShape" parent="Neighbors/West"]
+shape = SubResource( 7 )
+
+[node name="East" type="Area" parent="Neighbors"]
+transform = Transform( 0.8, 0, 0, 0, 8, 0, 0, 0, 0.8, 2, 0, 0 )
+collision_layer = 0
+
+[node name="CollisionShape" type="CollisionShape" parent="Neighbors/East"]
+shape = SubResource( 7 )
+
+[node name="South" type="Area" parent="Neighbors"]
+transform = Transform( 0.8, 0, 0, 0, 8, 0, 0, 0, 0.8, 0, 0, 2 )
+collision_layer = 0
+
+[node name="CollisionShape" type="CollisionShape" parent="Neighbors/South"]
+shape = SubResource( 7 )
+
+[node name="North" type="Area" parent="Neighbors"]
+transform = Transform( 0.8, 0, 0, 0, 8, 0, 0, 0, 0.8, 0, 0, -2 )
+collision_layer = 0
+
+[node name="CollisionShape" type="CollisionShape" parent="Neighbors/North"]
+shape = SubResource( 7 )
