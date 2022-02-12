@@ -29,8 +29,9 @@ func _select_pawn_for_movement():
 	if self.curr_pawn != null and self.curr_pawn.can_act():
 		var t = self.curr_pawn.get_tile()
 		var d = self.curr_pawn.distance
+		var h = self.curr_pawn.jump_height
 		self.t_camera.set_target(t)
-		self.arena.mark_available_movements(t, d, self.pawns)
+		self.arena.mark_available_movements(t, d, h, self.pawns)
 
 func _select_tile_for_movement():
 	var t = self.t_camera.select_tile()

@@ -2,7 +2,6 @@ extends Spatial
 
 """
 TODO
-configure jump and vertical tiles like buildings, bridges, etc.
 attack and health
 """
 

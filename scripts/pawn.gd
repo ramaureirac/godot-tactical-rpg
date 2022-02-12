@@ -7,6 +7,7 @@ var can_attack = false
 var path_stack = []
 
 export var distance = 5
+export var jump_height = 3
 
 func can_act():
 	return self.can_move or self.can_attack
