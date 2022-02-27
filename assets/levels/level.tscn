@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/arenas/arena.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/pawns/ally.tscn" type="PackedScene" id=2]
@@ -7,9 +7,12 @@
 [ext_resource path="res://assets/pawns/enemy.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scripts/player.gd" type="Script" id=6]
 [ext_resource path="res://assets/camera/tcamera.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/interfaces/player_ui.tscn" type="PackedScene" id=8]
 
 [node name="Level" type="Spatial"]
 script = ExtResource( 3 )
+
+[node name="PlayerUI" parent="." instance=ExtResource( 8 )]
 
 [node name="Arena" parent="." instance=ExtResource( 1 )]
 
@@ -18,15 +21,19 @@ script = ExtResource( 6 )
 
 [node name="Ally" parent="Allies" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2, -2 )
+pawn_name = "Diana Prince"
 
 [node name="Ally2" parent="Allies" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+pawn_name = "Clark Kent"
 
 [node name="Ally3" parent="Allies" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -4 )
+pawn_name = "Bruno Diaz"
 
 [node name="Ally4" parent="Allies" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -8 )
+pawn_name = "Barry Allen"
 
 [node name="Enemies" type="Spatial" parent="."]
 script = ExtResource( 4 )

@@ -8,4 +8,4 @@ You can see all project's features on [YouTube](https://www.youtube.com/watch?v=
 Another demo from [Open Source Games](https://www.youtube.com/watch?v=-AY6KEdX_3E).
 
 ### Preview
-![preview](https://i.ibb.co/MNznGYX/preview-trpg-godot.png)
+![preview](./docs/preview.png)
