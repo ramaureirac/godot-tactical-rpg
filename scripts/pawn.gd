@@ -11,6 +11,14 @@ export var pawn_name = "Jhon Doe"
 export var distance = 5
 export var jump_height = 3
 
+func reset():
+	self.can_move = true
+	self.path_stack.clear()
+
+func wait():
+	self.can_move = false
+	self.can_attack = false
+
 func can_act():
 	return self.can_move or self.can_attack
 
