@@ -5,6 +5,8 @@
 [node name="PlayerUI" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_top = -2.0
+margin_bottom = -2.0
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -22,6 +24,142 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="vbox_stats" type="VBoxContainer" parent="hbox"]
+margin_right = 1046.0
+margin_bottom = 640.0
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="hbox" type="HBoxContainer" parent="hbox/vbox_stats"]
+margin_top = 485.0
+margin_right = 1046.0
+margin_bottom = 640.0
+
+[node name="vbox" type="VBoxContainer" parent="hbox/vbox_stats/hbox"]
+margin_right = 158.0
+margin_bottom = 155.0
+alignment = 1
+
+[node name="lbl_pawn_stats" type="Label" parent="hbox/vbox_stats/hbox/vbox"]
+margin_top = 17.0
+margin_right = 158.0
+margin_bottom = 48.0
+text = "PAWN STATS
+"
+uppercase = true
+
+[node name="hbox_name" type="HBoxContainer" parent="hbox/vbox_stats/hbox/vbox"]
+margin_top = 52.0
+margin_right = 158.0
+margin_bottom = 66.0
+
+[node name="lbl_name" type="Label" parent="hbox/vbox_stats/hbox/vbox/hbox_name"]
+margin_right = 46.0
+margin_bottom = 14.0
+text = "name: "
+uppercase = true
+
+[node name="lbl_name_value" type="Label" parent="hbox/vbox_stats/hbox/vbox/hbox_name"]
+margin_left = 50.0
+margin_right = 116.0
+margin_bottom = 14.0
+text = "Jhon Doe"
+uppercase = true
+
+[node name="hbox_health" type="HBoxContainer" parent="hbox/vbox_stats/hbox/vbox"]
+margin_top = 70.0
+margin_right = 158.0
+margin_bottom = 84.0
+
+[node name="lbl_health" type="Label" parent="hbox/vbox_stats/hbox/vbox/hbox_health"]
+margin_right = 58.0
+margin_bottom = 14.0
+text = "Health: "
+uppercase = true
+
+[node name="lbl_curr_health_value" type="Label" parent="hbox/vbox_stats/hbox/vbox/hbox_health"]
+margin_left = 62.0
+margin_right = 86.0
+margin_bottom = 14.0
+text = "150"
+uppercase = true
+
+[node name="lbl_health_div" type="Label" parent="hbox/vbox_stats/hbox/vbox/hbox_health"]
+margin_left = 90.0
+margin_right = 95.0
+margin_bottom = 14.0
+text = "/"
+uppercase = true
+
+[node name="lbl_max_health_value" type="Label" parent="hbox/vbox_stats/hbox/vbox/hbox_health"]
+margin_left = 99.0
+margin_right = 123.0
+margin_bottom = 14.0
+text = "150"
+uppercase = true
+
+[node name="hbox_attack" type="HBoxContainer" parent="hbox/vbox_stats/hbox/vbox"]
+margin_top = 88.0
+margin_right = 158.0
+margin_bottom = 102.0
+
+[node name="lbl_attack" type="Label" parent="hbox/vbox_stats/hbox/vbox/hbox_attack"]
+margin_right = 107.0
+margin_bottom = 14.0
+text = "Attack power: "
+uppercase = true
+
+[node name="lbl_attack_value" type="Label" parent="hbox/vbox_stats/hbox/vbox/hbox_attack"]
+margin_left = 111.0
+margin_right = 127.0
+margin_bottom = 14.0
+text = "30"
+uppercase = true
+
+[node name="hbox_walk" type="HBoxContainer" parent="hbox/vbox_stats/hbox/vbox"]
+margin_top = 106.0
+margin_right = 158.0
+margin_bottom = 120.0
+
+[node name="lbl_walk" type="Label" parent="hbox/vbox_stats/hbox/vbox/hbox_walk"]
+margin_right = 146.0
+margin_bottom = 14.0
+text = "Movement radious: "
+uppercase = true
+
+[node name="lbl_walk_value" type="Label" parent="hbox/vbox_stats/hbox/vbox/hbox_walk"]
+margin_left = 150.0
+margin_right = 158.0
+margin_bottom = 14.0
+text = "5"
+uppercase = true
+
+[node name="hbox_attack_r" type="HBoxContainer" parent="hbox/vbox_stats/hbox/vbox"]
+margin_top = 124.0
+margin_right = 158.0
+margin_bottom = 138.0
+
+[node name="lbl_attack_r" type="Label" parent="hbox/vbox_stats/hbox/vbox/hbox_attack_r"]
+margin_right = 116.0
+margin_bottom = 14.0
+text = "Attack radious:"
+uppercase = true
+
+[node name="lbl_attack_r_value" type="Label" parent="hbox/vbox_stats/hbox/vbox/hbox_attack_r"]
+margin_left = 120.0
+margin_right = 128.0
+margin_bottom = 14.0
+text = "1"
+uppercase = true
+
+[node name="spacer" type="Panel" parent="hbox/vbox_stats/hbox"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 162.0
+margin_right = 1046.0
+margin_bottom = 155.0
+rect_min_size = Vector2( 0, 155 )
+size_flags_horizontal = 3
+
 [node name="vbox" type="VBoxContainer" parent="hbox"]
 margin_left = 1050.0
 margin_right = 1200.0
@@ -33,7 +171,7 @@ margin_top = 460.0
 margin_right = 150.0
 margin_bottom = 480.0
 rect_min_size = Vector2( 0, 20 )
-text = "- TACTICS MENU -"
+text = "TACTICS MENU"
 align = 1
 uppercase = true
 

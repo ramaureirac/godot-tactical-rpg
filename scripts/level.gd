@@ -14,7 +14,7 @@ func _configure():
 	self.arena = $Arena
 	self.player = $Allies
 	self.enemy = $Enemies
-	self.player.configure($TCamera, $Arena, $PlayerUI)
+	self.player.configure($TCamera, $Arena, $Enemies.get_children(), $PlayerUI)
 	self.enemy.configure($TCamera, $Arena, $Allies.get_children())
 
 func _switch_turns():

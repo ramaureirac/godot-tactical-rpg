@@ -61,11 +61,22 @@ func mark_available_movements(var from, var d, var h=3, var walkeable_obj=[]):
 	mark which tiles are reachable according
 	to 'd' parameter. First it link all possible destinations.
 	"""
-	if from == null: return
+	if !from: return
 	self._gen_movement_tree(from, h, walkeable_obj)
 	for t in $Tiles.get_children():
 		if t == from or t.weight <= d and t.weight > 0 and !t.taken:
 			t.reachable = true
+
+func mark_attackable_tiles(var from, var d, var attackables =[]):
+	"""
+	mark which tiles are reachable according
+	to 'd' parameter. First it link all possible destinations.
+	"""
+	if !from: return
+	self._gen_movement_tree(from, d, attackables)
+	for t in $Tiles.get_children():
+		if t != from and t.weight <= d and t.weight > 0:
+			t.attackable = true
 
 func gen_path(var tile):
 	"""
