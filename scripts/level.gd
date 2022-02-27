@@ -14,7 +14,7 @@ func _ready():
 	self.arena = $Arena
 	self.player = $Allies
 	self.enemy = $Enemies
-	self.player.configure($TCamera, $Arena)
+	self.player.configure($TCamera, $Arena, $PlayerUI)
 	self.enemy.configure($TCamera, $Arena)
 
 func _switch_turn():
@@ -46,14 +46,12 @@ func _move_pawn(var delta):
 		self.enemy.curr_pawn = null
 		self.arena.reset()
 
-func _turn_handler():
-	if self.players_turn:
-		self.player.ally_move_pawn()
-	else:
-		self.enemy.set_destination(self.player.pawns)
+func _turn_handler(var delta):
+	if self.players_turn: self.player.act(delta)
+	else: self.enemy.set_destination(self.player.pawns)
 
 func _process(var delta):
-	self._turn_handler()
-	self._move_pawn(delta)
+	self._turn_handler(delta)
+	if !players_turn: self._move_pawn(delta)
 	self.player.camera_rotation()
 	self._switch_turn()

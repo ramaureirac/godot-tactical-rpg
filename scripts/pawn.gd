@@ -6,6 +6,8 @@ var can_move = true
 var can_attack = false
 var path_stack = []
 
+# attributes
+export var pawn_name = "Jhon Doe"
 export var distance = 5
 export var jump_height = 3
 
