@@ -10,7 +10,7 @@ config_version=4
 
 [application]
 
-config/name="tactical-bias"
+config/name="godot-tactical-rpg"
 run/main_scene="res://assets/levels/level.tscn"
 config/icon="res://icons/icon.png"
 

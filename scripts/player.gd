@@ -63,10 +63,10 @@ func _act_select_a_command_for_pawn():
 	if Input.is_action_just_pressed("ui_cancel"):
 		self.stage_control = 0
 
-	elif Input.is_action_just_pressed("player_move_pawn"):
+	elif Input.is_action_just_pressed("player_move_pawn") and self.curr_pawn.can_move:
 		self.stage_control = 2
 
-	elif Input.is_action_just_pressed("player_attack_pawn"):
+	elif Input.is_action_just_pressed("player_attack_pawn") and self.curr_pawn.can_attack:
 		self.stage_control = 4
 
 	elif Input.is_action_just_pressed("player_wait_pawn"):
