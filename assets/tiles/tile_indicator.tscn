@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=2]
+
+[sub_resource type="PlaneMesh" id=4]
+
+[sub_resource type="SpatialMaterial" id=5]
+albedo_color = Color( 0.00784314, 0.207843, 0.317647, 1 )
+
+[sub_resource type="SpatialMaterial" id=7]
+albedo_color = Color( 0.52549, 0.0117647, 0.0117647, 1 )
+
+[sub_resource type="SpatialMaterial" id=6]
+albedo_color = Color( 0.196078, 0.333333, 0.443137, 1 )
+
+[node name="Indicators" type="Spatial"]
+transform = Transform( 0.9, 0, 0, 0, 1, 0, 0, 0, 0.9, 0, 0.001, 0 )
+
+[node name="PathGen" type="MeshInstance" parent="."]
+visible = false
+mesh = SubResource( 4 )
+skeleton = NodePath("../Reachable")
+material/0 = SubResource( 5 )
+
+[node name="Attackable" type="MeshInstance" parent="."]
+visible = false
+mesh = SubResource( 4 )
+skeleton = NodePath("../Reachable")
+material/0 = SubResource( 7 )
+
+[node name="Reachable" type="MeshInstance" parent="."]
+visible = false
+mesh = SubResource( 4 )
+material/0 = SubResource( 6 )

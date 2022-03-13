@@ -1,14 +1,19 @@
 extends StaticBody
 
-var neighbors = []			
-var reachable = false		
-var path_gen = false
-var taken = false
+# path finding
+var neighbors = []
 var root = null	
 var weight = 0
 var inv_weight = INF
 
-# REFACTOR + OPTIMIZE!!!!
+# indicators
+var reachable = false		
+var path_gen = false
+var taken = false
+var attackable = false
+
+# REFACTOR + OPTIMIZE!!!! X2
+# note: use above raycast in order to know if is taken!!!!!!!!!!!
 func _find_neighbors():
 	if $Neighbors and self.neighbors.size() == 0:
 		for areas in $Neighbors.get_children():
@@ -33,6 +38,7 @@ func _find_neighbors():
 func _mark_tile():
 	$Indicators/Reachable.visible = self.reachable and !self.path_gen
 	$Indicators/PathGen.visible = self.reachable and self.path_gen
+	$Indicators/Attackable.visible = self.attackable
 
 func _process(_delta):
 	self._find_neighbors()
@@ -46,6 +52,7 @@ func reset():
 	self.reachable = false
 	self.path_gen = false
 	self.taken = false
+	self.attackable = false
 	self.root = null
 	self.weight = 0
 	self.inv_weight = INF

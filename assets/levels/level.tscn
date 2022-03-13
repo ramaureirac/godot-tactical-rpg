@@ -34,21 +34,27 @@ pawn_name = "Bruno Diaz"
 [node name="Ally4" parent="Allies" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -8 )
 pawn_name = "Barry Allen"
+distance = 7
 
 [node name="Enemies" type="Spatial" parent="."]
 script = ExtResource( 4 )
 
 [node name="Enemy" parent="Enemies" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 4, -18 )
+pawn_name = "Ricardo Tapia"
+distance = 7
 
 [node name="Enemy2" parent="Enemies" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 4, -22 )
+pawn_name = "Victor Stone"
 
 [node name="Enemy3" parent="Enemies" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 4, -22 )
+pawn_name = "Kory Anders"
 
 [node name="Enemy4" parent="Enemies" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 4, -18 )
+pawn_name = "Rachel Roth"
 
 [node name="TCamera" parent="." instance=ExtResource( 7 )]
 
