@@ -15,7 +15,7 @@ func _configure():
 	self.player = $Allies
 	self.enemy = $Enemies
 	self.player.configure($TCamera, $Arena, $Enemies.get_children(), $PlayerUI)
-	self.enemy.configure($TCamera, $Arena, $Allies.get_children())
+	self.enemy.configure($TCamera, $Arena, $Allies.get_children(), $PlayerUI)
 
 func _switch_turns():
 	if self.players_turn:
@@ -29,6 +29,7 @@ func _reset_turns():
 	for p in (self.player.pawns + self.enemy.pawns): p.reset()
 
 func _turn_handler(var delta):
+	if self.player.pawns.empty() or self.enemy.pawns.empty(): return
 	if self.players_turn: self.player.act(delta)
 	else: self.enemy.act(delta)
 

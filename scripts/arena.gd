@@ -73,10 +73,13 @@ func mark_attackable_tiles(var from, var d, var attackables =[]):
 	to 'd' parameter. First it link all possible destinations.
 	"""
 	if !from: return
+	var tiles = []
 	self._gen_movement_tree(from, d, attackables)
 	for t in $Tiles.get_children():
 		if t != from and t.weight <= d and t.weight > 0:
 			t.attackable = true
+			tiles.append(t)
+	return tiles
 
 func gen_path(var tile):
 	"""

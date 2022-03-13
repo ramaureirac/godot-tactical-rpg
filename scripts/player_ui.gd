@@ -22,27 +22,27 @@ func _player_wait_pawn():
 func _ui_cancel():
 	Input.action_press("ui_cancel")
 
-func update_layout_info(var pawn, var stage):
+func display_pawn_stats(var pawn):
 	if !pawn:
-		self._reset_buttons()
-	else:
-		var can_go_back = stage > 0
-		var lock_cmds = stage > 1
+		$hbox/vbox_stats.visible = false
+		return
+	$hbox/vbox_stats.visible = true
+	$hbox/vbox_stats/hbox/vbox/hbox_name/lbl_name_value.text = pawn.pawn_name
+	$hbox/vbox_stats/hbox/vbox/hbox_health/lbl_curr_health_value.text = String(pawn.curr_health)
+	$hbox/vbox_stats/hbox/vbox/hbox_health/lbl_max_health_value.text = String(pawn.max_health)
+	$hbox/vbox_stats/hbox/vbox/hbox_attack/lbl_attack_value.text = String(pawn.attack_power)
+	$hbox/vbox_stats/hbox/vbox/hbox_walk/lbl_walk_value.text = String(pawn.distance)
+	$hbox/vbox_stats/hbox/vbox/hbox_attack_r/lbl_attack_r_value.text = String(pawn.attack_radious)
 
-		$hbox/vbox/buttons/btn_move.disabled = !pawn.can_move or lock_cmds
-		$hbox/vbox/buttons/btn_attack.disabled = !pawn.can_attack or lock_cmds
-		$hbox/vbox/buttons/btn_wait.disabled = false or lock_cmds
-		$hbox/vbox/buttons/btn_cancel.disabled = !can_go_back
-		
-		$hbox/vbox_stats.visible = true
-		$hbox/vbox_stats/hbox/vbox/hbox_name/lbl_name_value.text = pawn.pawn_name
-		$hbox/vbox_stats/hbox/vbox/hbox_health/lbl_curr_health_value.text = String(pawn.curr_health)
-		$hbox/vbox_stats/hbox/vbox/hbox_health/lbl_max_health_value.text = String(pawn.max_health)
-		$hbox/vbox_stats/hbox/vbox/hbox_attack/lbl_attack_value.text = String(pawn.attack_power)
-		$hbox/vbox_stats/hbox/vbox/hbox_walk/lbl_walk_value.text = String(pawn.distance)
-		$hbox/vbox_stats/hbox/vbox/hbox_attack_r/lbl_attack_r_value.text = String(pawn.attack_radious)
-
-func _reset_buttons():
-	for b in $hbox/vbox/buttons.get_children():
-		b.disabled = true
-	$hbox/vbox_stats.visible = false
+func update_buttons(var pawn, var stage):
+	self.display_pawn_stats(pawn)
+	if !pawn: 
+		for b in $hbox/vbox/buttons.get_children():
+			b.disabled = true
+		return
+	var can_go_back = stage > 0
+	var lock_cmds = stage > 1
+	$hbox/vbox/buttons/btn_move.disabled = !pawn.can_move or lock_cmds
+	$hbox/vbox/buttons/btn_attack.disabled = !pawn.can_attack or lock_cmds
+	$hbox/vbox/buttons/btn_wait.disabled = false or lock_cmds
+	$hbox/vbox/buttons/btn_cancel.disabled = !can_go_back

@@ -41,7 +41,7 @@ func _act_select_a_pawn():
 	"""
 	self.arena.reset()
 	self.curr_pawn = null
-	self.player_ui.update_layout_info(self.curr_pawn, self.stage_control)
+	self.player_ui.update_buttons(self.curr_pawn, self.stage_control)
 	if Input.is_action_just_pressed("ui_accept"):
 		self._aux_select_a_pawn()
 		if self.curr_pawn: self.stage_control = 1
@@ -58,7 +58,7 @@ func _act_select_a_command_for_pawn():
 	"""
 	self.arena.reset()
 	self.curr_pawn.get_tile().reachable = true
-	self.player_ui.update_layout_info(self.curr_pawn, self.stage_control)
+	self.player_ui.update_buttons(self.curr_pawn, self.stage_control)
 
 	if Input.is_action_just_pressed("ui_cancel"):
 		self.stage_control = 0
@@ -86,7 +86,7 @@ func _act_select_a_tile_to_move():
 
 	- At this stage player can go back
 	"""
-	self.player_ui.update_layout_info(self.curr_pawn, self.stage_control)
+	self.player_ui.update_buttons(self.curr_pawn, self.stage_control)
 	var t = self.curr_pawn.get_tile()
 	var d = self.curr_pawn.distance
 	var h = self.curr_pawn.jump_height
@@ -111,14 +111,14 @@ func _act_move_selected_pawn(var delta):
 	- At this stage player just can see what is happing on the level
 	  but has no interaction with it.
 	"""
-	self.player_ui.update_layout_info(null, self.stage_control)
+	self.player_ui.update_buttons(null, self.stage_control)
 	if self.curr_pawn.move(delta):
 		self.curr_pawn.can_move = false
 		if self.curr_pawn.can_act(): self.stage_control = 1
 		else: self.stage_control = 0
 
 func _act_select_a_tile_to_attack():
-	self.player_ui.update_layout_info(self.curr_pawn, self.stage_control)
+	self.player_ui.update_buttons(self.curr_pawn, self.stage_control)
 	var t = self.curr_pawn.get_tile()
 	var r = self.curr_pawn.attack_radious
 	self.arena.reset()
@@ -135,7 +135,7 @@ func _act_select_a_tile_to_attack():
 		else: self.stage_control = 0
 
 #func _act_attack_selected_tile(delta):
-#	self.player_ui.update_layout_info(null, self.stage_control)
+#	self.player_ui.update_buttons(null, self.stage_control)
 #	if
 
 func act(var delta):
