@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scripts/pawn.gd" type="Script" id=1]
 
-[sub_resource type="BoxShape" id=4]
+[sub_resource type="SphereShape" id=4]
 
 [sub_resource type="SphereMesh" id=2]
 

@@ -129,10 +129,11 @@ func _act_select_a_tile_to_attack():
 
 	elif Input.is_action_just_pressed("ui_accept"):
 		var p = self.t_camera.select_pawn()
-		self.curr_pawn.attack(p)
-		self.curr_pawn.can_attack = false
-		if self.curr_pawn.can_act(): self.stage_control = 1
-		else: self.stage_control = 0
+		if p != curr_pawn:
+			self.curr_pawn.attack(p)
+			self.curr_pawn.can_attack = false
+			if self.curr_pawn.can_act(): self.stage_control = 1
+			else: self.stage_control = 0
 
 #func _act_attack_selected_tile(delta):
 #	self.player_ui.update_buttons(null, self.stage_control)
