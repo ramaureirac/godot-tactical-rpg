@@ -1,4 +1,4 @@
-<img src="https://i.imgur.com/8foVHjO.png" width="280">
+![banner](./docs/banner.png)
  
 A simple template for making <i>tactical role-playing games</i> on [Godot Engine](https://godotengine.org/).
 This is not a fully functional game framework or a professional work, just a simple project made in my free time. 
