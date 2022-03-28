@@ -14,8 +14,8 @@ export (Utils.PAWN_STRATEGIES) var pawn_strategy
 export (String) var pawn_name = "Trooper"
 
 # pawn available actions
-export var can_move = true
-export var can_attack = true
+var can_move = true
+var can_attack = true
 
 # stats
 var move_radious 
