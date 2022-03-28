@@ -6,8 +6,23 @@ Anyways, feel free to use this sample in your own game.
 
 You can see all project's features on [YouTube](https://www.youtube.com/watch?v=j0ov4zGUp68).<br/>
 Another demo from [Open Source Games](https://www.youtube.com/watch?v=-AY6KEdX_3E).
+In case you are searching for some 2d projects, checkout [GDQuest](https://github.com/GDQuest/godot-2d-tactical-rpg-movement) (They are the real MVP)
 
-In case you are searching for some 2d projects, checkout [GDQuest](https://github.com/GDQuest/godot-2d-tactical-rpg-movement)
+#### Features
+
+- Turn based plus grid movements
+- Each pawn can move and attack
+- Super basic (and stupid) enemy AI
+- Camera movements and rotations
+- Automatic battlegroud map recognition (req. Blender + Godot export) [docs pending]
+- Controller Support
 
 ### Preview
 ![preview](./docs/preview.png)
+
+#### Special thanks
+
+- GDQuest
+- Tiny Legions
+- Miziziziz
+- Almost every other guy at Godot's formus / StackOverflow
