@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/tscn/test_arena.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/tscn/tactics_camera.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://assets/tscn/ui/player_controller_ui.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/player_controller.gd" type="Script" id=5]
 [ext_resource path="res://src/enemy_controller.gd" type="Script" id=6]
+[ext_resource path="res://src/pawn.gd" type="Script" id=7]
 [ext_resource path="res://assets/tscn/pawn.tscn" type="PackedScene" id=8]
 
 [node name="Level" type="Spatial"]
@@ -43,11 +44,22 @@ pawn_name = "Bruno"
 script = ExtResource( 6 )
 
 [node name="Pawn4" parent="Enemy" instance=ExtResource( 8 )]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.5, 0.5, 0.5 )
-pawn_class = 3
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.5, 0.5, 3.5 )
+pawn_class = 1
 pawn_name = "Kori"
 
+[node name="Pawn6" parent="Enemy" instance=ExtResource( 8 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.5, 0.5, 4.5 )
+script = ExtResource( 7 )
+pawn_name = "Victor"
+
 [node name="Pawn5" parent="Enemy" instance=ExtResource( 8 )]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.5, 0.5, 0.5 )
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.5, 0.5, 5.5 )
 pawn_class = 1
 pawn_name = "Raven"
+
+[node name="Pawn7" parent="Enemy" instance=ExtResource( 8 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.5, 0.5, 4.5 )
+script = ExtResource( 7 )
+pawn_class = 2
+pawn_name = "Ricardo"

@@ -3,15 +3,16 @@ extends Spatial
 const Utils = preload("res://src/utils.gd")
 
 
-func link_tiles(var root, var height):
+func link_tiles(var root, var height, var allies_arr=null):
 	var pq = [root]
 	while !pq.empty():
 		var curr_tile = pq.pop_front()
 		for neighbor in curr_tile.get_neighbors(height):
 			if !neighbor.root and neighbor != root:
-				neighbor.root = curr_tile
-				neighbor.distance = curr_tile.distance+1
-				pq.push_back(neighbor)
+				if !(neighbor.is_taken() and allies_arr and !neighbor.get_object_above() in allies_arr):
+					neighbor.root = curr_tile
+					neighbor.distance = curr_tile.distance+1
+					pq.push_back(neighbor)
 
 
 func mark_hover_tile(var tile):
@@ -51,7 +52,7 @@ func get_nearest_neighbor_to_pawn(var pawn, var pawn_arr):
 	var nearest_t = null
 	for p in pawn_arr:
 		for n in p.get_tile().get_neighbors(pawn.jump_height):
-			if (!nearest_t or n.distance < nearest_t.distance) and !n.is_taken():
+			if (!nearest_t or n.distance < nearest_t.distance) and n.distance > 0 and !n.is_taken():
 				nearest_t = n
 	while nearest_t and !nearest_t.reachable: nearest_t = nearest_t.root
 	return nearest_t if nearest_t else pawn.get_tile()
@@ -60,6 +61,6 @@ func get_nearest_neighbor_to_pawn(var pawn, var pawn_arr):
 func get_weakest_pawn_to_attack(var pawn_arr):
 	var weakest = null
 	for p in pawn_arr:
-		if (!weakest or p.curr_health < weakest.curr_health) and p.get_tile().attackable:
+		if (!weakest or p.curr_health < weakest.curr_health) and p.curr_health > 0 and p.get_tile().attackable:
 			weakest = p
 	return weakest

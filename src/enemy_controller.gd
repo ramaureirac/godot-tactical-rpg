@@ -20,7 +20,6 @@ func reset():
 
 
 func configure(var my_arena, var my_camera):
-	targets = get_parent().get_node("Player")
 	tactics_camera = my_camera
 	arena = my_arena
 	curr_pawn = get_children().front()
@@ -35,7 +34,7 @@ func choose_pawn():
 
 func chase_nearest_enemy():
 	arena.reset()
-	arena.link_tiles(curr_pawn.get_tile(), curr_pawn.jump_height)
+	arena.link_tiles(curr_pawn.get_tile(), curr_pawn.jump_height, get_children())
 	arena.mark_reachable_tiles(curr_pawn.get_tile(), curr_pawn.move_radious)
 	var to = arena.get_nearest_neighbor_to_pawn(curr_pawn, targets.get_children())
 	curr_pawn.path_stack = arena.generate_path_stack(to)
@@ -70,6 +69,7 @@ func attack_pawn(var delta):
 
 
 func act(var delta):
+	targets = get_parent().get_node("Player")
 	match stage:
 		0: choose_pawn()
 		1: chase_nearest_enemy()

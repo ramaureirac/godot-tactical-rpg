@@ -151,7 +151,7 @@ billboard = 1
 texture = SubResource( 15 )
 
 [node name="Viewport" type="Viewport" parent="CharacterStats/Name"]
-size = Vector2( 128, 30 )
+size = Vector2( 150, 30 )
 transparent_bg = true
 render_target_v_flip = true
 

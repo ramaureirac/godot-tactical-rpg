@@ -93,7 +93,7 @@ func display_available_movements():
 	arena.reset()
 	if !curr_pawn: return
 	tactics_camera.target = curr_pawn
-	arena.link_tiles(curr_pawn.get_tile(), curr_pawn.jump_height)
+	arena.link_tiles(curr_pawn.get_tile(), curr_pawn.jump_height, get_children())
 	arena.mark_reachable_tiles(curr_pawn.get_tile(), curr_pawn.move_radious)
 	stage = 3
 
