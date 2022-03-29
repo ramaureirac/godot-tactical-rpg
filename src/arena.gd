@@ -51,6 +51,7 @@ func _ready():
 func get_nearest_neighbor_to_pawn(var pawn, var pawn_arr):
 	var nearest_t = null
 	for p in pawn_arr:
+		if p.curr_health <= 0: continue
 		for n in p.get_tile().get_neighbors(pawn.jump_height):
 			if (!nearest_t or n.distance < nearest_t.distance) and n.distance > 0 and !n.is_taken():
 				nearest_t = n
