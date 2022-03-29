@@ -1,6 +1,8 @@
 ![banner](./docs/banner.png)
  
-A simple template for making <i>tactical role-playing games</i> on [Godot Engine](https://godotengine.org/).
+#### About
+
+A simple template for making <i>tactical role-playing games</i> on [Godot Engine 3.4.2](https://godotengine.org/).
 This is not a fully functional game framework or a professional work, just a simple project made in my free time. 
 Anyways, feel free to use this sample in your own game. 
 
@@ -17,7 +19,8 @@ Anyways, feel free to use this sample in your own game.
 - Automatic battlegroud map recognition (req. Blender + Godot Export) [Docs Pending!]
 - Controller Support
 
-### Preview
+#### Preview
+
 ![preview](./docs/preview.png)
 
 #### Special thanks
