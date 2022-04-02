@@ -1,4 +1,4 @@
-![banner](./docs/banner.png)
+![banner](./docs/img/banner.png)
  
 #### About
 
@@ -16,12 +16,12 @@ Anyways, feel free to use this sample in your own game.
 - Each pawn can move and attack
 - Super basic (and stupid) enemy AI
 - Camera movements and rotations
-- Automatic battlegroud map recognition (req. Blender + Godot Export) [Docs Pending!]
+- Automatic battlegroud map recognition (req. Blender + Godot Export) [Here](./docs/tutorials/how-to-create-maps/README.md)
 - Controller Support
 
 #### Preview
 
-![preview](./docs/preview.png)
+![preview](./docs/img/preview.png)
 
 #### Special thanks
 

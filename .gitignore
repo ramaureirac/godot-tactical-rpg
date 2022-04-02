@@ -13,5 +13,6 @@ data_*/
 .vscode/
 .DS_Store
 
-docs/*.import
+docs/img/*.import
+docs/img/tutorials/how-to-create-maps/img/*.import
 
