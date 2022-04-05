@@ -93,7 +93,7 @@ From object mode, select all tiles. Then go to Object > Set Origin > Origin to g
 Now each tile is independent and has its own origin
 ![preview](./img/27.png)
 
-Select all tiles, hit "Ctrl+A" and select Scale the enter to confirm. This will do apparently but will reset each tile into a 1x1 size insted the 5x5 that we set in first place.
+Select all tiles, hit "Ctrl+A" and select Scale the enter to confirm. This will do nothing apparently, but will reset each tile into a 1x1 size insted the 5x5 that we set in first place.
 ![preview](./img/28.png)
 
 You can check those values in the expanding the right menu
