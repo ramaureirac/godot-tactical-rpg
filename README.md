@@ -9,7 +9,7 @@ Anyways, feel free to use this sample in your own game.
 
 - You can see all project's features on [YouTube](https://www.youtube.com/watch?v=j0ov4zGUp68).
 - Another demo from [Open Source Games](https://www.youtube.com/watch?v=-AY6KEdX_3E).
-- In case you are searching for some 2d projects, checkout [GDQuest](https://github.com/GDQuest/godot-2d-tactical-rpg-movement) (They are the real MVP)
+- In case you are searching for some 2d projects, checkout [GDQuest](https://github.com/GDQuest/godot-2d-tactical-rpg-movement) or [TBS_GoDot](https://github.com/ja-brouil/TBS_GoDot)
 
 
 #### Features
