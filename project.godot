@@ -69,8 +69,8 @@ config/icon="res://icons/icon.png"
 
 [display]
 
-window/size/viewport_width=1024
-window/size/viewport_height=600
+window/size/viewport_width=1280
+window/size/viewport_height=800
 
 [input]
 

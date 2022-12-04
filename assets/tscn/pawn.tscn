@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://6eofg7n4asn5"]
+[gd_scene load_steps=18 format=3 uid="uid://6eofg7n4asn5"]
 
 [ext_resource type="Script" path="res://src/pawn.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://bob12its3i651" path="res://assets/sprites/characters/chr_pawn_placeholder.png" id="2"]
@@ -95,17 +95,10 @@ transitions = ["IDLE", "JUMP", SubResource("11"), "JUMP", "IDLE", SubResource("1
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id="8"]
 
-[sub_resource type="ViewportTexture" id="14"]
-viewport_path = NodePath("CharacterStats/Health/SubViewport")
-
-[sub_resource type="ViewportTexture" id="15"]
-viewport_path = NodePath("CharacterStats/Name/SubViewport")
-
 [node name="Pawn" type="CharacterBody3D"]
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("1")
-pawn_name = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.2, 0, 0, 0, -8.74228e-09, -0.4, 0, 0.2, -1.74846e-08, 0, 0.6, 0)
@@ -133,31 +126,19 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource("8")
 
 [node name="CharacterStats" type="Node3D" parent="."]
+visible = false
 
-[node name="Health" type="Sprite3D" parent="CharacterStats"]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 1.4, 0)
+[node name="NameLabel" type="Label3D" parent="CharacterStats"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
 billboard = 1
-texture = SubResource("14")
+outline_modulate = Color(0, 0, 0, 0)
+text = "PawnName"
+font_size = 42
+outline_size = 0
 
-[node name="SubViewport" type="SubViewport" parent="CharacterStats/Health"]
-transparent_bg = true
-size = Vector2i(128, 30)
-
-[node name="Label" type="Label" parent="CharacterStats/Health/SubViewport"]
-offset_right = 53.0
-offset_bottom = 14.0
+[node name="HealthLabel" type="Label3D" parent="CharacterStats"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+billboard = 1
 text = "100/100"
-
-[node name="Name" type="Sprite3D" parent="CharacterStats"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
-billboard = 1
-texture = SubResource("15")
-
-[node name="SubViewport" type="SubViewport" parent="CharacterStats/Name"]
-transparent_bg = true
-size = Vector2i(150, 30)
-
-[node name="Label" type="Label" parent="CharacterStats/Name/SubViewport"]
-offset_right = 53.0
-offset_bottom = 14.0
-text = "Name"
+font_size = 48
+outline_size = 0

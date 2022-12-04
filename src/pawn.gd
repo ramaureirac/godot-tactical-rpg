@@ -150,8 +150,7 @@ func _load_animator_sprite():
 	animator.start("IDLE")
 	$Character/AnimationTree.active = true
 	$Character.texture = Utils.get_pawn_sprite(pawn_class)
-	$CharacterStats/Name/SubViewport/Label.text = pawn_name+\
-		", the "+String(Utils.PAWN_CLASSES.keys()[pawn_class])
+	$CharacterStats/NameLabel.text = pawn_name+", the "+String(Utils.PAWN_CLASSES.keys()[pawn_class])
 
 
 func tint_when_not_able_to_act():
@@ -173,4 +172,5 @@ func _process(delta):
 	apply_movement(delta)
 	start_animator()
 	tint_when_not_able_to_act()
-	$CharacterStats/Health/SubViewport/Label.text = str(curr_health)+"/"+str(max_health)
+	$CharacterStats/HealthLabel.text = str(curr_health)+"/"+str(max_health)
+	

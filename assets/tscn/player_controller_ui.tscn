@@ -25,7 +25,7 @@ grow_vertical = 2
 
 [node name="VBox" type="VBoxContainer" parent="HBox"]
 offset_right = 512.0
-offset_bottom = 568.0
+offset_bottom = 720.0
 size_flags_vertical = 3
 
 [node name="ControllerHints" type="TextureRect" parent="HBox/VBox"]
@@ -37,44 +37,48 @@ stretch_mode = 5
 [node name="Panel" type="Panel" parent="HBox"]
 modulate = Color(1, 1, 1, 0)
 offset_left = 516.0
-offset_right = 1008.0
-offset_bottom = 568.0
+offset_right = 1000.0
+offset_bottom = 720.0
 size_flags_horizontal = 3
 
 [node name="Actions" type="VBoxContainer" parent="HBox"]
-offset_left = 1012.0
-offset_right = 1072.0
-offset_bottom = 568.0
+offset_left = 1004.0
+offset_right = 1200.0
+offset_bottom = 720.0
 alignment = 2
 
 [node name="Move" type="Button" parent="HBox/Actions"]
-offset_top = 432.0
-offset_right = 60.0
-offset_bottom = 463.0
+custom_minimum_size = Vector2(196, 64)
+offset_top = 452.0
+offset_right = 196.0
+offset_bottom = 516.0
 mouse_filter = 1
 mouse_default_cursor_shape = 2
 text = "Move"
 
 [node name="Attack" type="Button" parent="HBox/Actions"]
-offset_top = 467.0
-offset_right = 60.0
-offset_bottom = 498.0
+custom_minimum_size = Vector2(196, 64)
+offset_top = 520.0
+offset_right = 196.0
+offset_bottom = 584.0
 mouse_filter = 1
 mouse_default_cursor_shape = 2
 text = "Attack"
 
 [node name="Wait" type="Button" parent="HBox/Actions"]
-offset_top = 502.0
-offset_right = 60.0
-offset_bottom = 533.0
+custom_minimum_size = Vector2(196, 64)
+offset_top = 588.0
+offset_right = 196.0
+offset_bottom = 652.0
 mouse_filter = 1
 mouse_default_cursor_shape = 2
 text = "Wait"
 
 [node name="Cancel" type="Button" parent="HBox/Actions"]
-offset_top = 537.0
-offset_right = 60.0
-offset_bottom = 568.0
+custom_minimum_size = Vector2(196, 64)
+offset_top = 656.0
+offset_right = 196.0
+offset_bottom = 720.0
 mouse_filter = 1
 mouse_default_cursor_shape = 2
 text = "Cancel"

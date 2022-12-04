@@ -7,7 +7,6 @@ func get_all_neighbors(height):
 		var obj = ray.get_collider()
 		if obj and abs(obj.get_position().y-get_parent().get_position().y) <= height:
 			objects.append(obj)
-	print(len(objects))
 	return objects
 
 	
