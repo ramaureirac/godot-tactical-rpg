@@ -1,4 +1,5 @@
-extends Spatial
+extends Node3D
+class_name TacticsEnemyController
 
 var stage = 0
 var curr_pawn
@@ -19,7 +20,7 @@ func reset():
 	for p in get_children(): p.reset()
 
 
-func configure(var my_arena, var my_camera):
+func configure(my_arena, my_camera):
 	tactics_camera = my_camera
 	arena = my_arena
 	curr_pawn = get_children().front()
@@ -43,7 +44,7 @@ func chase_nearest_enemy():
 
 
 func move_pawn():
-	if curr_pawn.path_stack.empty(): 
+	if curr_pawn.path_stack.is_empty(): 
 		stage = 3
 
 
@@ -58,7 +59,7 @@ func choose_pawn_to_attack():
 	stage = 4 
 
 
-func attack_pawn(var delta):
+func attack_pawn(delta):
 	if !attackable_pawn: curr_pawn.can_attack = false
 	else:
 		if !curr_pawn.do_attack(attackable_pawn, delta): return
@@ -68,7 +69,7 @@ func attack_pawn(var delta):
 	stage = 0
 
 
-func act(var delta):
+func act(delta):
 	targets = get_parent().get_node("Player")
 	match stage:
 		0: choose_pawn()

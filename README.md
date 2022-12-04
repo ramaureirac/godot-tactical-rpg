@@ -3,7 +3,7 @@
 #### About
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 
-A simple template for making <i>tactical role-playing games</i> on [Godot Engine 3.4.2](https://godotengine.org/).
+A simple template for making <i>tactical role-playing games</i> on [Godot Engine 4](https://godotengine.org/).
 This is not a fully functional game framework or a professional work, just a simple project made in my free time. 
 Anyways, feel free to use this sample in your own game. 
 

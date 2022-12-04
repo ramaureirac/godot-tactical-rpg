@@ -1,4 +1,5 @@
-extends KinematicBody
+extends CharacterBody3D
+class_name TacticsPawn 
 
 const Utils = preload("res://src/utils.gd")
 
@@ -9,9 +10,9 @@ const GRAVITY_STRENGTH = 7
 const MIN_TIME_FOR_ATTACK = 1
 
 # class
-export (Utils.PAWN_CLASSES) var pawn_class
-export (Utils.PAWN_STRATEGIES) var pawn_strategy
-export (String) var pawn_name = "Trooper"
+@export var pawn_class : Utils.PAWN_CLASSES
+@export var pawn_strategy : Utils.PAWN_STRATEGIES
+@export var pawn_name : String = "Trooper"
 
 # pawn available actions
 var can_move = true
@@ -26,7 +27,7 @@ var max_health = 100
 var curr_health = 100
 
 # animation
-export (int) var curr_frame = 0
+var curr_frame : int = 0
 var animator = null
 
 # pathfinding
@@ -42,44 +43,47 @@ func get_tile():
 
 
 func rotate_pawn_sprite():
-	var camera_forward = -get_viewport().get_camera().global_transform.basis.z
+	var camera_forward = -get_viewport().get_camera_3d().global_transform.basis.z
 	var dot = global_transform.basis.z.dot(camera_forward)
 	$Character.flip_h = global_transform.basis.x.dot(camera_forward) > 0
 	if dot < -0.306: $Character.frame = curr_frame
 	elif dot > 0.306: $Character.frame = curr_frame + 1 * ANIMATION_FRAMES
 
 
-func look_at_direction(var dir):
+func look_at_direction(dir):
 	var fixed_dir = dir*(Vector3(1,0,0) if abs(dir.x) > abs(dir.z) else Vector3(0,0,1))
 	var angle = Vector3.FORWARD.signed_angle_to(fixed_dir.normalized(), Vector3.UP)+PI
 	set_rotation(Vector3.UP*angle)
 
 
-func follow_the_path(var delta):
+func follow_the_path(delta):
 	if !can_move : return
-	if !move_direction : move_direction = path_stack.front()-global_transform.origin
+	if move_direction == null : move_direction = path_stack.front()-global_transform.origin
 	if move_direction.length() > 0.5:
 
 		look_at_direction(move_direction)
-		var velocity = move_direction.normalized()
+		var p_velocity = move_direction.normalized()
 		var curr_speed = SPEED
 
 		# apply jump
 		if move_direction.y > MIN_HEIGHT_TO_JUMP: 
 			curr_speed = clamp(abs(move_direction.y)*2.3, 3, INF)
 			is_jumping = true
-		
+
 		# fall or move to the edge before falling
 		elif move_direction.y < -MIN_HEIGHT_TO_JUMP:
 			if Utils.vector_distance_without_y(path_stack.front(), global_transform.origin) <= 0.2:
 				gravity += Vector3.DOWN*delta*GRAVITY_STRENGTH
-				velocity = (path_stack.front()-global_transform.origin).normalized()+gravity
+				p_velocity = (path_stack.front()-global_transform.origin).normalized()+gravity
 			else:
-				velocity = Utils.vector_remove_y(move_direction).normalized()
-		
-		var _v = move_and_slide(velocity*curr_speed, Vector3.UP)
+				p_velocity = Utils.vector_remove_y(move_direction).normalized()
+
+		set_velocity(p_velocity*curr_speed)
+		set_up_direction(Vector3.UP)
+		move_and_slide()
+		var _v = p_velocity
 		if global_transform.origin.distance_to(path_stack.front()) >= 0.2: return
-	
+
 	path_stack.pop_front()
 	move_direction = null
 	is_jumping = false
@@ -90,16 +94,19 @@ func follow_the_path(var delta):
 
 func adjust_to_center():
 	move_direction = get_tile().global_transform.origin-global_transform.origin
-	var _v = move_and_slide(move_direction*SPEED*4, Vector3.UP)
+	set_velocity(move_direction*SPEED*4)
+	set_up_direction(Vector3.UP)
+	move_and_slide()
+	var _v = velocity
 
 
 func start_animator():
-	if !move_direction : animator.travel("IDLE")
+	if move_direction == null : animator.travel("IDLE")
 	elif is_jumping: animator.travel("JUMP")
 
 
-func apply_movement(var delta):
-	if !path_stack.empty(): follow_the_path(delta)
+func apply_movement(delta):
+	if !path_stack.is_empty(): follow_the_path(delta)
 	else: adjust_to_center()
 
 
@@ -108,7 +115,7 @@ func do_wait():
 	can_attack = false
 
 
-func do_attack(var a_pawn, var delta):
+func do_attack(a_pawn, delta):
 	look_at_direction(a_pawn.global_transform.origin-global_transform.origin)
 	if can_attack and wait_delay > MIN_TIME_FOR_ATTACK / 4.0: 
 		a_pawn.curr_health = clamp(a_pawn.curr_health-attack_power, 0, INF)
@@ -143,7 +150,7 @@ func _load_animator_sprite():
 	animator.start("IDLE")
 	$Character/AnimationTree.active = true
 	$Character.texture = Utils.get_pawn_sprite(pawn_class)
-	$CharacterStats/Name/Viewport/Label.text = pawn_name+\
+	$CharacterStats/Name/SubViewport/Label.text = pawn_name+\
 		", the "+String(Utils.PAWN_CLASSES.keys()[pawn_class])
 
 
@@ -151,7 +158,7 @@ func tint_when_not_able_to_act():
 	$Character.modulate = Color(.7, .7, .7) if !can_act() else Color(1,1,1)
 
 
-func display_pawn_stats(var v):
+func display_pawn_stats(v):
 	$CharacterStats.visible = v
 
 
@@ -161,9 +168,9 @@ func _ready():
 	display_pawn_stats(false)
 
 
-func _process(var delta):
+func _process(delta):
 	rotate_pawn_sprite()
 	apply_movement(delta)
 	start_animator()
 	tint_when_not_able_to_act()
-	$CharacterStats/Health/Viewport/Label.text = String(curr_health)+"/"+String(max_health)
+	$CharacterStats/Health/SubViewport/Label.text = str(curr_health)+"/"+str(max_health)

@@ -1,0 +1,80 @@
+[gd_scene load_steps=3 format=3 uid="uid://bky8ul2628kxw"]
+
+[ext_resource type="Texture2D" uid="uid://crwcj7eegnn36" path="res://assets/sprites/labels/controls-ui-xbox.png" id="1"]
+[ext_resource type="Script" path="res://src/player_controller_ui.gd" id="2"]
+
+[node name="PlayerControllerUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2")
+
+[node name="HBox" type="HBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_top = 40.0
+offset_right = -40.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="HBox"]
+offset_right = 512.0
+offset_bottom = 568.0
+size_flags_vertical = 3
+
+[node name="ControllerHints" type="TextureRect" parent="HBox/VBox"]
+offset_right = 512.0
+offset_bottom = 256.0
+texture = ExtResource("1")
+stretch_mode = 5
+
+[node name="Panel" type="Panel" parent="HBox"]
+modulate = Color(1, 1, 1, 0)
+offset_left = 516.0
+offset_right = 1008.0
+offset_bottom = 568.0
+size_flags_horizontal = 3
+
+[node name="Actions" type="VBoxContainer" parent="HBox"]
+offset_left = 1012.0
+offset_right = 1072.0
+offset_bottom = 568.0
+alignment = 2
+
+[node name="Move" type="Button" parent="HBox/Actions"]
+offset_top = 432.0
+offset_right = 60.0
+offset_bottom = 463.0
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+text = "Move"
+
+[node name="Attack" type="Button" parent="HBox/Actions"]
+offset_top = 467.0
+offset_right = 60.0
+offset_bottom = 498.0
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+text = "Attack"
+
+[node name="Wait" type="Button" parent="HBox/Actions"]
+offset_top = 502.0
+offset_right = 60.0
+offset_bottom = 533.0
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+text = "Wait"
+
+[node name="Cancel" type="Button" parent="HBox/Actions"]
+offset_top = 537.0
+offset_right = 60.0
+offset_bottom = 568.0
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+text = "Cancel"

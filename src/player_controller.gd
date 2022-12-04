@@ -1,4 +1,5 @@
-extends Spatial
+extends Node3D
+class_name TacticsPlayerController
 
 var curr_pawn = null
 var attackable_pawn = null
@@ -9,37 +10,39 @@ var wait_time = 0
 # controller status
 var is_joystick = false
 
-var arena = null
-var tactics_camera = null
+var arena : TacticsArena = null
+var tactics_camera : TacticsCamera = null
 
 # stage control
 var stage = 0
 
-var ui_control
+var ui_control : TacticsPlayerControllerUI = null
 
 
-func configure(var my_arena, var my_camera, var my_control):
+func configure(my_arena : TacticsArena, my_camera : TacticsCamera, my_control : TacticsPlayerControllerUI):
 	arena = my_arena
 	tactics_camera = my_camera
 	ui_control = my_control
 	tactics_camera.target = get_children().front()
 
-	ui_control.get_act("Move").connect("pressed", self, "player_wants_to_move")
-	ui_control.get_act("Wait").connect("pressed", self, "player_wants_to_wait")
-	ui_control.get_act("Cancel").connect("pressed", self, "player_wants_to_cancel")
-	ui_control.get_act("Attack").connect("pressed", self, "player_wants_to_attack")
+	ui_control.get_act("Move").connect("pressed",Callable(self,"player_wants_to_move"))
+	ui_control.get_act("Wait").connect("pressed",Callable(self,"player_wants_to_wait"))
+	ui_control.get_act("Cancel").connect("pressed",Callable(self,"player_wants_to_cancel"))
+	ui_control.get_act("Attack").connect("pressed",Callable(self,"player_wants_to_attack"))
 
 
-func get_mouse_over_object(var lmask):
+func get_mouse_over_object(lmask):
 	if ui_control.is_mouse_hover_button(): return
-	var camera = get_viewport().get_camera()
+	var camera = get_viewport().get_camera_3d()
 	var origin = get_viewport().get_mouse_position() if !is_joystick else get_viewport().size/2
 	var from = camera.project_ray_origin(origin)
 	var to = from + camera.project_ray_normal(origin)*1000000
-	return get_world().direct_space_state.intersect_ray(from, to, [], lmask).get("collider")
+	var ray_query = PhysicsRayQueryParameters3D.create(from, to, lmask, [])
+	return get_world_3d().direct_space_state.intersect_ray(ray_query).get("collider")
 
 
 func can_act():
+	#var pawn : TacticsPawn
 	for pawn in get_children(): 
 		if pawn.can_act(): return true 
 	return stage > 0
@@ -126,10 +129,10 @@ func select_pawn_to_attack():
 
 func move_pawn():
 	curr_pawn.display_pawn_stats(false)
-	if curr_pawn.path_stack.empty(): 
+	if curr_pawn.path_stack.is_empty(): 
 		stage = 0 if !curr_pawn.can_act() else 1
 
-func attack_pawn(var delta):
+func attack_pawn(delta):
 	if !attackable_pawn: curr_pawn.can_attack = false
 	else:
 		if !curr_pawn.do_attack(attackable_pawn, delta): return
@@ -149,7 +152,7 @@ func camera_rotation():
 	if Input.is_action_just_pressed("camera_rotate_right"): tactics_camera.y_rot += 90
 
 
-func act(var delta):
+func act(delta):
 	move_camera()
 	camera_rotation()
 	ui_control.set_visibility_of_actions_menu(stage in [1,2,3,5,6], curr_pawn)
@@ -163,9 +166,10 @@ func act(var delta):
 		6: select_pawn_to_attack()
 		7: attack_pawn(delta)
 
-func _process(var _delta):
+func _process(_delta):
 	Input.set_mouse_mode(is_joystick)
+	pass
 
-func _input(var event):
+func _input(event):
 	is_joystick = event is InputEventJoypadButton or event is InputEventJoypadMotion
 	ui_control.is_joystick = is_joystick

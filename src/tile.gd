@@ -1,15 +1,16 @@
-extends StaticBody
+extends StaticBody3D
+class_name TacticTile
 
 const Utils = preload("res://src/utils.gd")
 
-# tile tint materials
-var hover_mat = Utils.create_material("33ffffff")
+# tile tint materials https://fffuel.co/cccolor/ 
+var hover_mat = Utils.create_material("FFFFFF3F")
 
-var reachable_mat = Utils.create_material("e6143464")
-var hover_reachable_mat = Utils.create_material("d92d548f")
+var reachable_mat = Utils.create_material("008fdbBF")
+var hover_reachable_mat = Utils.create_material("0aa9ffBF")
 
-var attackable_mat = Utils.create_material("e6b4202a")
-var hover_attackable_mat = Utils.create_material("d9df3e23")
+var attackable_mat = Utils.create_material("d10000BF")
+var hover_attackable_mat = Utils.create_material("ff4242BF")
 
 # pathfinding attributes
 var root
@@ -24,7 +25,7 @@ var hover = false
 var tile_raycasting = load("res://assets/tscn/tile_raycasting.tscn")
 
 
-func get_neighbors(var height):
+func get_neighbors(height):
 	return $RayCasting.get_all_neighbors(height)
 
 
@@ -45,11 +46,11 @@ func reset():
 
 func configure_tile():
 	hover = false
-	add_child(tile_raycasting.instance())
+	add_child(tile_raycasting.instantiate())
 	reset()
 
 
-func _process(var _delta):
+func _process(_delta):
 	$Tile.visible = attackable or reachable or hover
 	match hover:
 		true:

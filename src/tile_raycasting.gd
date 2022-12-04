@@ -1,12 +1,13 @@
-extends Spatial 
+extends Node3D 
 
 
-func get_all_neighbors(var height):
+func get_all_neighbors(height):
 	var objects = []
 	for ray in $Neighbors.get_children():
 		var obj = ray.get_collider()
-		if obj and abs(obj.get_translation().y-get_parent().get_translation().y) <= height:
+		if obj and abs(obj.get_position().y-get_parent().get_position().y) <= height:
 			objects.append(obj)
+	print(len(objects))
 	return objects
 
 	

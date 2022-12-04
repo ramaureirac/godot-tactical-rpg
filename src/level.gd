@@ -1,23 +1,34 @@
-extends Spatial
+extends Node3D
+class_name TacticsLevel
 
 var t_from = null
 var t_to = null
 var curr_t = null
+var player : TacticsPlayerController = null
+var enemy : TacticsEnemyController
+var arena : TacticsArena
+var camera : TacticsCamera
+var ui_control : TacticsPlayerControllerUI
 
 
 func _ready():
-	$Player.configure($Arena, $TacticsCamera, $PlayerControllerUI)
-	$Enemy.configure($Arena, $TacticsCamera)
+	player = $Player
+	enemy = $Enemy
+	arena = $Arena
+	camera = $TacticsCamera
+	ui_control = $PlayerControllerUI
+	player.configure(arena, camera, ui_control)
+	enemy.configure(arena, camera)
 
 
-func turn_handler(var delta):
-	if $Player.can_act() : $Player.act(delta)
-	elif $Enemy.can_act() : $Enemy.act(delta)
+func turn_handler(delta):
+	if player.can_act() : player.act(delta)
+	elif enemy.can_act() : enemy.act(delta)
 	else:
-		$Player.reset()
-		$Enemy.reset()
+		player.reset()
+		enemy.reset()
 
 
-func _physics_process(var delta):
+func _physics_process(delta):
 	turn_handler(delta)
 

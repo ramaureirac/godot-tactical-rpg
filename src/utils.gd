@@ -11,34 +11,32 @@ const SKELETON_SPRITE = "res://assets/sprites/characters/chr_pawn_skeleton.png"
 const SKELETON_MAGE_SPRITE = "res://assets/sprites/characters/chr_pawn_skeleton_mage.png"
 
 
-static func convert_tiles_into_static_bodies(var tiles_obj):
+static func convert_tiles_into_static_bodies(tiles_obj):
 
-	"""
-	Given a Spatial Node as parameter (tiles_obj), this function will iterate over each
-	of its children converting them into a static body and attaching the tile.gd script.
-	e.g. this function will transform the 'Tiles' into the following structure:
+	#Given a Node3D Node as parameter (tiles_obj), this function will iterate over each
+	#of its children converting them into a static body and attaching the tile.gd script.
+	#e.g. this function will transform the 'Tiles' into the following structure:
 	
-		> Tiles:                                > Tiles:
-			> Tile1                                 > StaticBody (tile.gd):
-			> Tile2                                     > Tile1
-			...                                         > CollisionShape
-			> TileN       -- TRANSFORM INTO ->      > StaticBody2 (tile.gd):
-														> Tile2
-														> CollisionShape
-													...
-													> StaticBodyN (tile.gd):
-														> TileN
-														> CollisionShape
+	#	> Tiles:                                > Tiles:
+	#		> Tile1                                 > StaticBody3D (tile.gd):
+	#		> Tile2                                     > Tile1
+	#		...                                         > CollisionShape3D
+	#		> TileN       -- TRANSFORM INTO ->      > StaticBody2 (tile.gd):
+	#													> Tile2
+	#													> CollisionShape3D
+	#												...
+	#												> StaticBodyN (tile.gd):
+	#													> TileN
+	#													> CollisionShape3D
 
-	As you can see this is very usefull for configure walkeable tiles as fast as posible
-	especially if the map used was exported from Blender using the Godot Extension
-	"""
+	#As you can see this is very usefull for configure walkeable tiles as fast as posible
+	#especially if the map used was exported from Blender using the Godot Extension
 
 	for t in tiles_obj.get_children():
 		t.create_trimesh_collision()
 		var static_body = t.get_child(0)
-		static_body.set_translation(t.get_translation())
-		t.set_translation(Vector3.ZERO)
+		static_body.set_position(t.get_position())
+		t.set_position(Vector3.ZERO)
 		t.set_name("Tile")
 		t.remove_child(static_body)
 		tiles_obj.remove_child(t)
@@ -49,15 +47,16 @@ static func convert_tiles_into_static_bodies(var tiles_obj):
 		tiles_obj.add_child(static_body)
 
 
-static func create_material(var color, var texture=null):
-	var material = SpatialMaterial.new()
+static func create_material(color, texture=null, shaded_mode=0):
+	var material = StandardMaterial3D.new()
 	material.flags_transparent = true
 	material.albedo_color = Color(color)
 	material.albedo_texture = texture
+	material.shading_mode = shaded_mode
 	return material
 
 
-static func get_pawn_sprite(var pawn_class):
+static func get_pawn_sprite(pawn_class):
 	match pawn_class:
 		0: return load(KNIGHT_SPRITE)
 		1: return load(ARCHER_SPRITE)
@@ -66,9 +65,9 @@ static func get_pawn_sprite(var pawn_class):
 		4: return load(SKELETON_SPRITE)
 		5: return load(SKELETON_CPT_SPRITE)
 		6: return load(SKELETON_MAGE_SPRITE)
-    
+	
 
-static func get_pawn_move_radious(var pawn_class):
+static func get_pawn_move_radious(pawn_class):
 	match pawn_class:
 		0: return 3
 		1: return 5
@@ -79,7 +78,7 @@ static func get_pawn_move_radious(var pawn_class):
 		6: return 4
 
 
-static func get_pawn_jump_height(var pawn_class):
+static func get_pawn_jump_height(pawn_class):
 	match pawn_class:
 		0: return 0.5
 		1: return 3
@@ -90,7 +89,7 @@ static func get_pawn_jump_height(var pawn_class):
 		6: return 1
 
 
-static func get_pawn_attack_radious(var pawn_class):
+static func get_pawn_attack_radious(pawn_class):
 	match pawn_class:
 		0: return 1
 		1: return 6
@@ -101,7 +100,7 @@ static func get_pawn_attack_radious(var pawn_class):
 		6: return 3
 
 
-static func get_pawn_attack_power(var pawn_class):
+static func get_pawn_attack_power(pawn_class):
 	match pawn_class:
 		0: return 20
 		1: return 10
@@ -112,7 +111,7 @@ static func get_pawn_attack_power(var pawn_class):
 		6: return 12
 
 
-static func get_pawn_health(var pawn_class):
+static func get_pawn_health(pawn_class):
 	match pawn_class:
 		0: return 50
 		1: return 35
@@ -123,9 +122,9 @@ static func get_pawn_health(var pawn_class):
 		6: return 30
 
 
-static func vector_remove_y(var vector):
+static func vector_remove_y(vector):
 	return vector*Vector3(1,0,1)
 
 
-static func vector_distance_without_y(var b, var a):
+static func vector_distance_without_y(b, a):
 	return vector_remove_y(b).distance_to(vector_remove_y(a))

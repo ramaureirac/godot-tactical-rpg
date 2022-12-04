@@ -1,12 +1,13 @@
-extends Spatial
+extends Node3D
+class_name TacticsArena
 
 const Utils = preload("res://src/utils.gd")
 
 
-func link_tiles(var root, var height, var allies_arr=null):
+func link_tiles(root, height, allies_arr=null):
 	var pq = [root]
-	while !pq.empty():
-		var curr_tile = pq.pop_front()
+	while !pq.is_empty():
+		var curr_tile : TacticTile = pq.pop_front()
 		for neighbor in curr_tile.get_neighbors(height):
 			if !neighbor.root and neighbor != root:
 				if !(neighbor.is_taken() and allies_arr and !neighbor.get_object_above() in allies_arr):
@@ -15,22 +16,22 @@ func link_tiles(var root, var height, var allies_arr=null):
 					pq.push_back(neighbor)
 
 
-func mark_hover_tile(var tile):
+func mark_hover_tile(tile : TacticTile):
 	for t in $Tiles.get_children(): t.hover = false
 	if tile: tile.hover = true
 
 
-func mark_reachable_tiles(var root, var distance):
+func mark_reachable_tiles(root : TacticTile, distance):
 	for t in $Tiles.get_children():
 		t.reachable = t.distance > 0 and t.distance <= distance and !t.is_taken() or t == root
 
 
-func mark_attackable_tiles(var root, var distance):
+func mark_attackable_tiles(root : TacticTile, distance):
 	for t in $Tiles.get_children():
 		t.attackable = t.distance > 0 and t.distance <= distance or t == root
 
 
-func generate_path_stack(var to):
+func generate_path_stack(to):
 	var path_stack = []
 	while to:
 		#to.hover = true
@@ -48,7 +49,7 @@ func _ready():
 	Utils.convert_tiles_into_static_bodies($Tiles)
 
 
-func get_nearest_neighbor_to_pawn(var pawn, var pawn_arr):
+func get_nearest_neighbor_to_pawn(pawn, pawn_arr):
 	var nearest_t = null
 	for p in pawn_arr:
 		if p.curr_health <= 0: continue
@@ -59,7 +60,7 @@ func get_nearest_neighbor_to_pawn(var pawn, var pawn_arr):
 	return nearest_t if nearest_t else pawn.get_tile()
 
 
-func get_weakest_pawn_to_attack(var pawn_arr):
+func get_weakest_pawn_to_attack(pawn_arr):
 	var weakest = null
 	for p in pawn_arr:
 		if (!weakest or p.curr_health < weakest.curr_health) and p.curr_health > 0 and p.get_tile().attackable:
