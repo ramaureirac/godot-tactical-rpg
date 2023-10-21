@@ -3,16 +3,16 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://brgrjjiidgxun"
-path.etc2="res://.godot/imported/chr_pawn_chemist.png-9a30b9cb683733355e4ca530a1a2f3c8.etc2.ctex"
+path.s3tc="res://.godot/imported/chr_pawn_chemist.png-9a30b9cb683733355e4ca530a1a2f3c8.s3tc.ctex"
 metadata={
-"imported_formats": ["etc2_astc"],
+"imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/sprites/characters/chr_pawn_chemist.png"
-dest_files=["res://.godot/imported/chr_pawn_chemist.png-9a30b9cb683733355e4ca530a1a2f3c8.etc2.ctex"]
+dest_files=["res://.godot/imported/chr_pawn_chemist.png-9a30b9cb683733355e4ca530a1a2f3c8.s3tc.ctex"]
 
 [params]
 

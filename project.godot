@@ -20,6 +20,10 @@ config/icon="res://icons/icon.png"
 window/size/viewport_width=1280
 window/size/viewport_height=800
 
+[dotnet]
+
+project/assembly_name="godot-tactical-rpg"
+
 [input]
 
 ui_accept={
