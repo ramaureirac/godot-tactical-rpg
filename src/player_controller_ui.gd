@@ -26,7 +26,7 @@ func is_mouse_hover_button():
 
 func set_visibility_of_actions_menu(v, p):
 	if !$HBox/Actions.visible: $HBox/Actions/Move.grab_focus()
-	$HBox/Actions.visible = v
+	$HBox/Actions.visible = v and p.can_act()
 	if !p : return
 	$HBox/Actions/Move.disabled = !p.can_move
 	$HBox/Actions/Attack.disabled = !p.can_attack

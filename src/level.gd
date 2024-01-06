@@ -18,7 +18,7 @@ func _ready():
 	camera = $TacticsCamera
 	ui_control = $PlayerControllerUI
 	player.configure(arena, camera, ui_control)
-	enemy.configure(arena, camera)
+	enemy.configure(arena, camera, ui_control)
 
 
 func turn_handler(delta):

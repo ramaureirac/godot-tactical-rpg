@@ -9,6 +9,8 @@ var tactics_camera = null
 var arena = null
 var targets = null
 
+var ui_control : TacticsPlayerControllerUI = null
+
 
 func can_act():
 	for p in get_children():
@@ -20,9 +22,10 @@ func reset():
 	for p in get_children(): p.reset()
 
 
-func configure(my_arena, my_camera):
+func configure(my_arena, my_camera, my_ui_control):
 	tactics_camera = my_camera
 	arena = my_arena
+	ui_control = my_ui_control
 	curr_pawn = get_children().front()
 
 
@@ -71,6 +74,7 @@ func attack_pawn(delta):
 
 func act(delta):
 	targets = get_parent().get_node("Player")
+	ui_control.set_visibility_of_actions_menu(false, null)
 	match stage:
 		0: choose_pawn()
 		1: chase_nearest_enemy()
