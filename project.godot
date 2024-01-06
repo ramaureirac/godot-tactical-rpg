@@ -108,6 +108,8 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
 quality/filters/sharpen_intensity=0.5
 quality/intended_usage/framebuffer_allocation=3
 quality/filters/use_nearest_mipmap_filter=true
