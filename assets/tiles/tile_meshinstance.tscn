@@ -2,7 +2,7 @@
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_gei5j"]
 size = Vector2(1, 1)
-center_offset = Vector3(0, -0.25, 0)
+center_offset = Vector3(0, -0.249, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D"]
 mesh = SubResource("PlaneMesh_gei5j")
