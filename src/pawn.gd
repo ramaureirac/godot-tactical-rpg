@@ -93,7 +93,8 @@ func follow_the_path(delta):
 
 
 func adjust_to_center():
-	move_direction = get_tile().global_transform.origin-global_transform.origin
+	var tile_pos = get_tile().global_transform.origin - Vector3(0, 0.25, 0)
+	move_direction = tile_pos - global_transform.origin
 	set_velocity(move_direction*SPEED*4)
 	set_up_direction(Vector3.UP)
 	move_and_slide()

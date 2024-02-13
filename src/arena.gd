@@ -1,6 +1,7 @@
 extends Node3D
 class_name TacticsArena
 
+var pksc_tile: PackedScene = preload("res://assets/tiles/tile_meshinstance.tscn")
 const Utils = preload("res://src/utils.gd")
 
 
@@ -45,6 +46,11 @@ func reset():
 
 
 func _ready():
+	for c in $GridMap.get_used_cells():
+		var mesh = pksc_tile.instantiate()
+		$Tiles.add_child(mesh)
+		mesh.set_position($GridMap.map_to_local(c))
+	
 	$Tiles.visible = true
 	Utils.convert_tiles_into_static_bodies($Tiles)
 
