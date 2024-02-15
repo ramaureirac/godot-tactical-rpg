@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbn5bgvv0jhi5"]
+
+[ext_resource type="Script" path="res://assets/tiles/slope_meshinstance.gd" id="1_8vy2s"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_3512a"]
+_surfaces = [{
+"aabb": AABB(-0.5, -0.24, -0.5, 1, 0.50001, 1),
+"format": 34359742465,
+"index_count": 6,
+"index_data": PackedByteArray(0, 0, 1, 0, 2, 0, 2, 0, 3, 0, 0, 0),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray(0, 0, 0, 191, 184, 30, 133, 62, 0, 0, 0, 191, 0, 0, 0, 63, 184, 30, 133, 62, 0, 0, 0, 191, 0, 0, 0, 63, 143, 194, 117, 190, 0, 0, 0, 63, 0, 0, 0, 191, 143, 194, 117, 190, 0, 0, 0, 63)
+}]
+
+[node name="MeshInstance3D" type="MeshInstance3D"]
+mesh = SubResource("ArrayMesh_3512a")
+script = ExtResource("1_8vy2s")
