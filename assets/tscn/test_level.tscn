@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://conliaxesyag8"]
+[gd_scene load_steps=9 format=3 uid="uid://conliaxesyag8"]
 
 [ext_resource type="PackedScene" uid="uid://dwbmgds45ep4o" path="res://assets/tscn/test_arena.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://1ujfoei6r514" path="res://assets/tscn/tactics_camera.tscn" id="2"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://src/player_controller.gd" id="5"]
 [ext_resource type="Script" path="res://src/enemy_controller.gd" id="6"]
 [ext_resource type="PackedScene" uid="uid://6eofg7n4asn5" path="res://assets/tscn/pawn.tscn" id="8"]
+[ext_resource type="PackedScene" uid="uid://d2im4mntomt2x" path="res://assets/tiles/tile_meshinstance.tscn" id="8_5r68v"]
 
 [node name="Level" type="Node3D"]
 script = ExtResource("3")
@@ -21,21 +22,21 @@ script = ExtResource("3")
 script = ExtResource("5")
 
 [node name="Pawn" parent="Player" instance=ExtResource("8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 2.5, -3.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.5, -3.5)
 pawn_name = "Clark"
 
 [node name="Pawn2" parent="Player" instance=ExtResource("8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 2.5, -3.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.5, -3.5)
 pawn_class = 1
 pawn_name = "Diana"
 
 [node name="Pawn3" parent="Player" instance=ExtResource("8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 2.5, -4.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0, -4.5)
 pawn_class = 2
 pawn_name = "Bruno"
 
 [node name="Pawn4" parent="Player" instance=ExtResource("8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 2.5, -4.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.5, -4.5)
 pawn_class = 3
 pawn_name = "Shiera"
 
@@ -61,3 +62,7 @@ pawn_name = "Kori"
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.5, 0.5, 4.5)
 pawn_class = 5
 pawn_name = "Ricardo"
+
+[node name="ExampleTile" parent="." instance=ExtResource("8_5r68v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0.25, 6.5)
+visible = false

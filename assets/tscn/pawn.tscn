@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://6eofg7n4asn5"]
+[gd_scene load_steps=17 format=3 uid="uid://6eofg7n4asn5"]
 
 [ext_resource type="Script" path="res://src/pawn.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://bob12its3i651" path="res://assets/sprites/characters/chr_pawn_placeholder.png" id="2"]
@@ -76,13 +76,11 @@ animation = &"JUMP"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="12"]
 switch_mode = 2
-auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="19"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="20"]
 switch_mode = 2
-auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachine" id="7"]
 states/DAMAGE/node = SubResource("18")
@@ -92,8 +90,6 @@ states/IDLE/position = Vector2(299, 133)
 states/JUMP/node = SubResource("10")
 states/JUMP/position = Vector2(512, 133.312)
 transitions = ["IDLE", "JUMP", SubResource("11"), "JUMP", "IDLE", SubResource("12"), "IDLE", "DAMAGE", SubResource("19"), "DAMAGE", "IDLE", SubResource("20")]
-
-[sub_resource type="AnimationNodeStateMachinePlayback" id="8"]
 
 [node name="Pawn" type="CharacterBody3D"]
 collision_layer = 2
@@ -105,7 +101,7 @@ transform = Transform3D(0.2, 0, 0, 0, -8.74228e-09, -0.4, 0, 0.2, -1.74846e-08, 
 shape = SubResource("13")
 
 [node name="Tile" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [node name="Character" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.602, 0)
@@ -121,9 +117,11 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="Character"]
+libraries = {
+"": SubResource("AnimationLibrary_4xm2j")
+}
 tree_root = SubResource("7")
 anim_player = NodePath("../AnimationPlayer")
-parameters/playback = SubResource("8")
 
 [node name="CharacterStats" type="Node3D" parent="."]
 visible = false
